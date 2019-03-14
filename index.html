@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="./htmlparser.js"></script>
+    <script src="./html2json.js"></script>
+    <link href="./bootstrap4.css" rel="stylesheet">
+    <title>dom2Json</title>
+    <style>
+        html {
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+        }
+        body{
+            height: 100%;
+            width: 100%;
+        }
+        .form_inner{
+            display: flex; flex-direction: row; margin: 0px; padding: 0px;
+            height: 100%;
+            width: 100%;
+        }
+        .form-group{
+            width: 45%; height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .form_textarea{
+            flex:1;
+            margin: 0 40px;
+            margin-bottom: 20%;
+        }
+    </style>
+</head>
+
+<body>
+
+<form class="form_inner">
+    <div class="form-group">
+        <label>Example textarea</label>
+        <textarea class="form_textarea" id="html_input"
+                  placeholder="xml" ><view/></textarea>
+    </div>
+    <div class="form-group">
+        <label>json_output</label>
+        <!--<label for="json_output">json_output</label>-->
+        <textarea class="form_textarea" id="json_output"
+                  placeholder="json" ></textarea>
+    </div>
+</form>
+<script type="text/javascript">
+    var $html_input_area = document.getElementById("html_input");
+    var $json_output_area = document.getElementById("json_output");
+
+    $html_input_area.onchange = handleHtmlInput;
+
+    function handleHtmlInput() {
+        var _html = $html_input_area.value;
+
+        _html = _html.replace(/(\{\{)/g , "{").replace(/(\}\})/g , "}")
+        var html_json = html2json(_html);
+
+        $json_output_area.innerHTML = json2html(html_json );
+    }
+</script>
+</body>
+</html>
