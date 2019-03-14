@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="../wxml2html/bootstrap4.css" rel="stylesheet">
+    <script src="./wxss2css.js"></script>
+    <title>wxss2css</title>
+    <style>
+        html {
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+        }
+        body{
+            height: 100%;
+            width: 100%;
+        }
+        .form_inner{
+            display: flex; flex-direction: row; margin: 0px; padding: 0px;
+            height: 100%;
+            width: 100%;
+        }
+        .form-group{
+            width: 45%; height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .form_textarea{
+            flex:1;
+            margin: 0 40px;
+            margin-bottom: 20%;
+        }
+    </style>
+</head>
+
+<body>
+
+<form class="form_inner">
+    <div class="form-group">
+        <label>Example textarea</label>
+        <textarea class="form_textarea" id="wxss_input"
+                  placeholder="wxss 小程序 css" ></textarea>
+    </div>
+    <div class="form-group">
+        <label>css</label>
+        <textarea class="form_textarea" id="css_output"
+                  placeholder="css" ></textarea>
+    </div>
+</form>
+<script type="text/javascript">
+    var $wxss_input_area = document.getElementById("wxss_input");
+    var $css_output_area = document.getElementById("css_output");
+
+    $wxss_input_area.onchange = handleHtmlInput;
+
+    function handleHtmlInput() {
+        var _wxss = $wxss_input_area.value;
+        var _css = wxss2css(_wxss);
+        $css_output_area.innerHTML = _css;
+    }
+</script>
+</body>
+</html>

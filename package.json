@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start":"open ./wxml2html/index.html",
+    "start":"npm run start-wxss2css && npm run start-wxml2html",
+    "start-wxss2css":"open ./wxss2css/index.html",
+    "start-wxml2html":"open ./wxml2html/index.html",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
