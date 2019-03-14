@@ -152,7 +152,9 @@
                 return $1.substring(1,2).toUpperCase();
             });
             tem_attr = JSON.parse(json.attr["data"].replace(/\'/g,'"').replace(/(\w+)\:/g,function($1){
-                return '"'+ $1 + '":'
+                return '"'+ $1.substring(0,$1.length -1) + '":'
+            }).replace(/\:(\w+)/g,function($1){
+                return ':"'+ $1.substring(1) + '"'
             })); // 给所有的key 加 定界符" ,并且转换 成 json
 
             attrs = Object.keys(tem_attr).map(function (key) {
