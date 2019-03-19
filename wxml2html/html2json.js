@@ -5,6 +5,7 @@
     const image_reg = /image|cover-image/;
     const variable_in_value = /^(\ )*\{.*\}(\ )*$/;
     const array_reg = /^(\ )*\[.*\](\ )*$/;
+    // cc.replace(/\<!--(.*)--\>/g,($1,$2)=>`{\\*${$2}*\\}`)
 
     var debug = DEBUG ? console.log.bind(console) : function(){};
 
@@ -122,12 +123,12 @@
                     node: 'comment',
                     text: text,
                 };
-                var parent = bufArray[0];
+                var parent = bufArray[0] ||{};
                 if (parent.child === undefined) {
                     parent.child = [];
                 }
                 parent.child.push(node);
-            },
+            }
         });
         return results;
     };
@@ -229,7 +230,7 @@
         }
 
         if (json.node === 'comment') {
-            return '<!--' + json.text + '-->';
+            return "{/*" + json.text + '*/}';
         }
 
         if (json.node === 'root') {

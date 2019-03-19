@@ -62,6 +62,8 @@
         var _html = $html_input_area.value;
 
         _html = _html.replace(/(\{\{)/g , "{").replace(/(\}\})/g , "}")
+
+        _html = _html.replace(/\<!--(.*)--\>/g,"");
         var html_json = html2json(_html);
 
         $json_output_area.innerHTML = json2html(html_json );
