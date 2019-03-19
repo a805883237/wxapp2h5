@@ -187,7 +187,9 @@
                 }
 
                 /*------------   替换 事件  end  ------------*/
-
+                if(key==="class") key = "className";
+                // 将 class 中的 image 替换成 img
+                if( (key==="class" || key==="className") && value.indexOf("image")>-1) value= value.replace(/image/g,"img")
                 return key + '=' + q(value);
             }).join(' ');
             if (attr !== '') attr = ' ' + attr;

@@ -6,15 +6,18 @@
 
     function replaceTag(wxss) {
         return wxss
-            .replace(/page/g, 'body');
+            .replace(/page/g, 'body')
+            .replace(/image/g, 'img');
     }
 
     global.wxss2css = function wxss2css(wxss) {
         wxss = replaceTag(wxss);
 
         wxss = wxss.replace(/(\-|\+)?\d+(\.\d+)?rpx/gi,function ( $1 ){
-            // rpx值 除以 100
-            return Number($1.replace("rpx","")) / 100 + " rem"
+            // rpx值 除以 100 ,保留两位小数( * 100 / 100)
+            // return Math.round( Number($1.replace("rpx",""))) / 100 + "rem"
+            // rpx值 除以 75 ,保留两位小数( * 100 / 100)
+            return Math.round( Number($1.replace("rpx","")) / 75 * 100) / 100 + "rem"
         });
         return wxss
     };
